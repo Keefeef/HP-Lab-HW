@@ -14,6 +14,7 @@ get '/hogwarts' do
   erb(:index)
 end
 
+
 get '/hogwarts/new' do
   erb(:new)
 end
@@ -21,4 +22,4 @@ end
 post '/hogwarts' do
   @student = Student.new(params)
   @student.save
-end 
+end

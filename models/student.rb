@@ -17,8 +17,24 @@ attr_reader :id, :first_name, :last_name, :age, :house_id
 
   def pretty_name
     return "#{@first_name} #{@last_name}"
-  end 
+  end
 
+  def student_house
+    sql = "SELECT FROM students WHERE house_id = $1"
+    values = [@house_id]
+    houses = SqlRunner.run(sql, values)
+    result = houses.map{ |house| House.new(house)}
+  end
+
+
+  def house_name
+    if @house_id == 1
+      return "Gryffindor"
+    else @house_id == 2
+      return "Slytherin"
+    end
+  end
+end
 
   def save()
     sql = "INSERT INTO students
@@ -45,13 +61,11 @@ attr_reader :id, :first_name, :last_name, :age, :house_id
   return result
 end
 
+
 def self.find( id )
   sql = "SELECT * FROM students WHERE id = $1"
   values = [id]
   student = SqlRunner.run( sql, values )
   result = Student.new( student.first )
   return result
-end
-
-
 end
