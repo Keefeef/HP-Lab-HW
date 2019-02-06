@@ -15,6 +15,10 @@ attr_reader :id, :first_name, :last_name, :age, :house_id
     @house_id = options['house_id'].to_i
   end
 
+  def pretty_name
+    return "#{@first_name} #{@last_name}"
+  end 
+
 
   def save()
     sql = "INSERT INTO students

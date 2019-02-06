@@ -6,11 +6,19 @@ require_relative('./models/house')
 require_relative('./models/student')
 also_reload('./models/*')
 
-House.find(1)
-House.all
 
-Student.find(1)
-Student.all
 
-binding.pry
-nil
+
+get '/hogwarts' do
+  @students = Student.all()
+  erb(:index)
+end
+
+get '/hogwarts/new' do
+  erb(:new)
+end
+
+post '/hogwarts' do
+  @student = Student.new(params)
+  @student.save
+end 
